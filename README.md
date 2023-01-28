@@ -1,6 +1,11 @@
 # contacts
 CRUD app - contacts (Mean)
 
+Prerequisite:
+Angular CLI: 15.0
+Node: 16.17.0
+MongoDB - latest
+
 Steps:
 1. Create .env file in backend and set below values
  PORT=...
