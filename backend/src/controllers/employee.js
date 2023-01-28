@@ -20,11 +20,21 @@ class EmployeeController {
       next(ex);
     }
   }
-  create(req, res) {
-    res.end();
+  async create(req, res, next) {
+    try {
+      const result = await employeeService.create(req.body);
+      res.status(201).json(result);
+    } catch (ex) {
+      next(ex);
+    }
   }
-  update(req, res) {
-    res.end();
+  async update(req, res, next) {
+    try {
+      const result = await employeeService.update(req.params.id, req.body);
+      res.status(200).json(result);
+    } catch (ex) {
+      next(ex);
+    }
   }
   search(req, res) {
     res.end();
