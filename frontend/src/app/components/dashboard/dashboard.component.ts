@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Employee } from 'src/app/models/employee';
 import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
   }
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router: Router) {
     this.resetEmployeeList();
     this.editing = false;
     this.employeeObj = new Employee();
@@ -84,5 +85,8 @@ export class DashboardComponent implements OnInit {
       firstName: employee.first_name,
       lastName: employee.last_name,
     });
+  }
+  public onSelect(employee: Employee) {
+    this.router.navigate([`employees`, employee.id]);
   }
 }

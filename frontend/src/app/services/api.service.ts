@@ -18,5 +18,7 @@ export class ApiService {
   public getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.url);
   }
-  public getEmployee(id: number) {}
+  public getEmployee(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.url}/${id}`);
+  }
 }
