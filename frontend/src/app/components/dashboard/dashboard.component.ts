@@ -77,7 +77,8 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
-  public onEditEmployee(employee: Employee) {
+  public onEditEmployee(employee: Employee, event: any) {
+    event.stopPropagation();
     this.employeeObj.reset();
     this.employeeObj.id = employee.id;
     this.editing = true;
