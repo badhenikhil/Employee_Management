@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Employee } from '../models/employee';
 import { Observable } from 'rxjs';
 
@@ -20,5 +20,12 @@ export class ApiService {
   }
   public getEmployee(id: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.url}/${id}`);
+  }
+  public searchEmployees(searchText: string): Observable<Employee[]> {
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append('filter', searchText);
+    return this.http.get<Employee[]>(`${this.url}/search`, {
+      params: queryParams,
+    });
   }
 }

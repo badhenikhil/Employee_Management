@@ -66,6 +66,26 @@ class EmployeeService {
       throw ex;
     }
   }
+  /**Filter employees by searchtext
+   *
+   * @param {string} filter
+   * @returns filtered list
+   */
+  async search(filter) {
+    try {
+      const filterReg = new RegExp(`(${filter})`, "i");
+      const result = await this.model.find({
+        $or: [
+          { first_name: /(tt)/i },
+          { last_name: /dear/i },
+          { email: filterReg },
+        ],
+      });
+      return result;
+    } catch (ex) {
+      throw ex;
+    }
+  }
 }
 
 module.exports = EmployeeService;

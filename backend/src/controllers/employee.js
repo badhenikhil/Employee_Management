@@ -36,8 +36,13 @@ class EmployeeController {
       next(ex);
     }
   }
-  search(req, res) {
-    res.end();
+  async search(req, res, next) {
+    try {
+      const result = await employeeService.search(req.query.filter);
+      res.status(200).json(result);
+    } catch (ex) {
+      next(ex);
+    }
   }
 }
 

@@ -4,6 +4,8 @@ const employeeController = require("../controllers/employee");
 
 /* GET_ALL employees */
 router.get("/", employeeController.getAll);
+/**Filter employee record */
+router.get("/search", employeeController.search);
 /**Fetch employee details */
 router.get("/:id", employeeController.get);
 /**Create employee record */

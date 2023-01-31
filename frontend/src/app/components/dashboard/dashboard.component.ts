@@ -34,60 +34,77 @@ export class DashboardComponent implements OnInit {
   }
   private initForm() {
     this.employeeForm = new FormGroup({
-      firstName: new FormControl(null),
-      lastName: new FormControl(null),
+      first_name: new FormControl(null),
+      last_name: new FormControl(null),
+      email: new FormControl(null),
+      job_title: new FormControl(null),
+      department: new FormControl(null),
+      company_name: new FormControl(null),
+      language: new FormControl(null),
+      gender: new FormControl(null),
+      preferred_color: new FormControl(null),
     });
   }
   public addEmployee() {
     this.employeeObj.reset();
-    this.employeeObj.first_name = this.employeeForm.value.firstName;
-    this.employeeObj.last_name = this.employeeForm.value.lastName;
-    this.apiService.createEmployee(this.employeeObj).subscribe({
-      next: (result) => {
-        console.log(result);
-        this.resetEmployeeList();
-        alert('employee added!');
-      },
-      error: (e) => {
-        alert(e);
-      },
-      complete: () => {
-        const ref = document.getElementById('cancel-modal');
-        ref?.click();
-        this.editing = false;
-      },
-    });
+
+    this.apiService
+      .createEmployee(Object.assign(this.employeeObj, this.employeeForm.value))
+      .subscribe({
+        next: (result) => {
+          console.log(result);
+          this.resetEmployeeList();
+          alert('employee added!');
+        },
+        error: (e) => {
+          alert(e);
+        },
+        complete: () => {
+          const ref = document.getElementById('cancel-modal');
+          ref?.click();
+          this.editing = false;
+        },
+      });
   }
   public updateEmployee() {
-    this.employeeObj.first_name = this.employeeForm.value.firstName;
-    this.employeeObj.last_name = this.employeeForm.value.lastName;
-    this.apiService.updateEmployee(this.employeeObj).subscribe({
-      next: (result) => {
-        console.log(result);
-        this.resetEmployeeList();
-        alert('employee updated!');
-      },
-      error: (e) => {
-        alert(e);
-      },
-      complete: () => {
-        const ref = document.getElementById('cancel-modal');
-        ref?.click();
-        this.editing = false;
-      },
-    });
+    //this.employeeObj.first_name = this.employeeForm.value.first_name;
+    //this.employeeObj.last_name = this.employeeForm.value.last_name;
+    this.apiService
+      .updateEmployee(
+        Object.assign({ id: this.employeeObj.id }, this.employeeForm.value)
+      )
+      .subscribe({
+        next: (result) => {
+          console.log(result);
+          this.resetEmployeeList();
+          alert('employee updated!');
+        },
+        error: (e) => {
+          alert(e);
+        },
+        complete: () => {
+          const ref = document.getElementById('cancel-modal');
+          ref?.click();
+          this.editing = false;
+        },
+      });
   }
   public onEditEmployee(employee: Employee, event: any) {
     event.stopPropagation();
     this.employeeObj.reset();
     this.employeeObj.id = employee.id;
     this.editing = true;
-    this.employeeForm.patchValue({
-      firstName: employee.first_name,
-      lastName: employee.last_name,
-    });
+    this.employeeForm.patchValue(employee);
   }
   public onSelect(employee: Employee) {
     this.router.navigate([`employees`, employee.id]);
+  }
+  public onEnter(e: any) {
+    console.log(e.target.value);
+    this.apiService
+      .searchEmployees(e.target.value)
+      .subscribe((filteredList) => {
+        this.listEmployee = filteredList;
+      });
   }
 }

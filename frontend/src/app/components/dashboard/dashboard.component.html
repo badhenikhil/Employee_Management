@@ -1,6 +1,10 @@
 <nav class="navbar navbar-light bg-primary">
 	<div class="container-fluid">
-		<h1 style="color:aliceblue">Contacts Manager</h1>
+		<h4 style="color:aliceblue">Contacts Manager</h4>
+		<div class="d-flex">
+			<input type="search" class="form-control ds-input" id="search-input" placeholder="Search..."
+				aria-autocomplete="list" dir="auto" (keyup.enter)="onEnter($event)">
+		</div>
 		<div class="d-flex">
 			<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee</button>
 		</div>
@@ -44,12 +48,47 @@
 				<form [formGroup]="employeeForm" class="form-wrapper">
 					<div class="mb-3">
 						<label for="first-name" class="form-label">First Name</label>
-						<input type="text" formControlName="firstName" class="form-control" id="first-name">
+						<input type="text" formControlName="first_name" class="form-control" id="first-name">
 
 					</div>
 					<div class="mb-3">
 						<label for="last-name" class="form-label">Last Name</label>
-						<input type="text" formControlName="lastName" class="form-control" id="last-name">
+						<input type="text" formControlName="last_name" class="form-control" id="last-name">
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label">Email</label>
+						<input type="email" formControlName="email" class="form-control" id="email">
+					</div>
+					<div class="mb-3">
+						<label for="job-title" class="form-label">Job Title</label>
+						<input type="text" formControlName="job_title" class="form-control" id="job-title">
+					</div>
+					<div class="mb-3">
+						<label for="department" class="form-label">Department</label>
+						<input type="text" formControlName="department" class="form-control" id="department">
+					</div>
+					<div class="mb-3">
+						<label for="company-name" class="form-label">Company Name</label>
+						<input type="text" formControlName="company_name" class="form-control" id="company-name">
+					</div>
+					<div class="mb-3">
+						<label for="language" class="form-label">Language</label>
+						<input type="text" formControlName="language" class="form-control" id="language">
+					</div>
+					<div class="mb-3">
+						<label for="gender" class="form-label">Gender</label>
+						<select class="form-select from-control" formControlName="gender" aria-label="Default select"
+							id="gender">
+
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+
+						</select>
+
+					</div>
+					<div class="mb-3">
+						<label for="preferred-color" class="form-label">Preferred Color</label>
+						<input type="text" formControlName="preferred_color" class="form-control" id="preferred-color">
 					</div>
 				</form>
 			</div>
