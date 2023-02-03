@@ -1,5 +1,5 @@
-# Employee contacts
-CRUD app - contacts (Mean)
+# Employee Management
+CRUD app - Employee Management (Mean)
 
 # Prerequisite:
  -> Angular CLI: 15.0<br/>
