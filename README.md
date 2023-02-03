@@ -1,4 +1,4 @@
-# contacts
+# Employee contacts
 CRUD app - contacts (Mean)
 
 # Prerequisite:
